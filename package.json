@@ -1,6 +1,6 @@
 {
   "name": "@jonz94/prettier-plugin-tailwindcss",
-  "version": "0.1.7",
+  "version": "0.1.7-patch.0",
   "description": "A patched https://github.com/tailwindlabs/prettier-plugin-tailwindcss package to make some internal function export.",
   "main": "dist/index.js",
   "files": [
