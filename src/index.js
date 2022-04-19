@@ -141,7 +141,7 @@ function sortClasses(
   return prefix + result + suffix
 }
 
-function createParser(original, transform) {
+export function createParser(original, transform) {
   return {
     ...original,
     parse(text, parsers, options = {}) {
@@ -208,7 +208,7 @@ function createParser(original, transform) {
   }
 }
 
-function transformHtml(attributes, computedAttributes = []) {
+export function transformHtml(attributes, computedAttributes = []) {
   let transform = (ast, { env }) => {
     for (let attr of ast.attrs ?? []) {
       if (attributes.includes(attr.name)) {
@@ -325,7 +325,7 @@ function sortTemplateLiteral(node, { env }) {
   return didChange
 }
 
-function transformJavaScript(ast, { env }) {
+export function transformJavaScript(ast, { env }) {
   visit(ast, {
     JSXAttribute(node) {
       if (!node.value) {
@@ -348,7 +348,7 @@ function transformJavaScript(ast, { env }) {
   })
 }
 
-function transformCss(ast, { env }) {
+export function transformCss(ast, { env }) {
   ast.walk((node) => {
     if (node.type === 'css-atrule' && node.name === 'apply') {
       node.params = sortClasses(node.params, {
@@ -422,7 +422,7 @@ export const parsers = {
   }),
 }
 
-function transformSvelte(ast, { env, changes }) {
+export function transformSvelte(ast, { env, changes }) {
   for (let attr of ast.attributes ?? []) {
     if (attr.name === 'class' && attr.type === 'Attribute') {
       for (let i = 0; i < attr.value.length; i++) {
